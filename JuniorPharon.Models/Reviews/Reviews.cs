@@ -8,5 +8,15 @@ namespace JuniorPharon.Models
 {
     public class Reviews
     {
+        public int Id { get; set; }
+        public string Comment { get; set; }
+        public float Rating { get; set; }
+        public DateTime CreationDate { get; set; }
+
+        public virtual int TripId { get; set; }
+        public virtual string UserId { get; set; }
+        
+        public virtual Trips Trip { get; set; }
+        public virtual User User { get; set; }
     }
 }
