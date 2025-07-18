@@ -11,5 +11,8 @@ public class Notification
     public string Title { get; set; }
     public NotificationType  Type { get; set; }
     
+    //Relations
+    public string UserId  { get; set; }
+    public virtual User User { get; set; }
     
 }

@@ -5,11 +5,13 @@ namespace JuniorPharon.Models
 {
     public class User : IdentityUser
     {
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
         
         public string? LastName { get; set; }
         
         public string? NationalId { get; set; }
+        
+        public string Nationality { get; set; }
         
         public string? ProfileImg { get; set; }
         
@@ -25,10 +27,11 @@ namespace JuniorPharon.Models
         
         public string? ProfileImgUrl { get; set; }
         
-        
-        public ICollection<Bookings> Bookings { get; set; }
-        public ICollection<Reviews> Reviews { get; set; }
-        public ICollection<Messages> SentMessages { get; set; }
-        public ICollection<Messages> ReceivedMessages { get; set; }
+        public virtual ICollection<Trips> Trips { get; set; }
+        public virtual ICollection<Bookings> Bookings { get; set; }
+        public virtual ICollection<Reviews> Reviews { get; set; }
+        public virtual ICollection<Messages> SentMessages { get; set; }
+        public virtual ICollection<Messages> ReceivedMessages { get; set; }
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

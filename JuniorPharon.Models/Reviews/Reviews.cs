@@ -14,9 +14,9 @@ namespace JuniorPharon.Models
         public DateTime CreationDate { get; set; }
 
         public virtual int TripId { get; set; }
-        public virtual string UserId { get; set; }
+        public virtual string ClientId { get; set; }
         
         public virtual Trips Trip { get; set; }
-        public virtual User User { get; set; }
+        public virtual User Client { get; set; }
     }
 }
