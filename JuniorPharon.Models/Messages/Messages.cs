@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JuniorPharon.Models
 {
-    public class Massages
+    public class Messages
     {
     }
 }

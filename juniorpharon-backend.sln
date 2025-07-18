@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.API", "JuniorP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.Models", "JuniorPharon.Models\JuniorPharon.Models.csproj", "{27ED4437-D774-4A92-B8D1-74B2348D331A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.Context", "JuniorPharon.Context\JuniorPharon.Context.csproj", "{0E3EA7D5-2915-477D-A87A-99D8C14F4A4A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.Repository", "JuniorPharon.Repository\JuniorPharon.Repository.csproj", "{FF9566D8-B668-4C60-9176-3ED02A43971C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.ViewModels", "JuniorPharon.ViewModels\JuniorPharon.ViewModels.csproj", "{59175F59-9D29-4FB5-8169-52F21034B1A0}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JuniorPharon.Services", "JuniorPharon.Services\JuniorPharon.Services.csproj", "{ED83CFF5-D19D-4BB6-A63D-57016A524988}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{FFDB738E-E847-45BD-AD8D-E8DB7DD16E58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.SqlServer", "Infrastructure.SqlServer\Infrastructure.SqlServer.csproj", "{169E9C97-AAA6-423A-8014-6004E857D1EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +33,6 @@ Global
 		{27ED4437-D774-4A92-B8D1-74B2348D331A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27ED4437-D774-4A92-B8D1-74B2348D331A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27ED4437-D774-4A92-B8D1-74B2348D331A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E3EA7D5-2915-477D-A87A-99D8C14F4A4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E3EA7D5-2915-477D-A87A-99D8C14F4A4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E3EA7D5-2915-477D-A87A-99D8C14F4A4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E3EA7D5-2915-477D-A87A-99D8C14F4A4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF9566D8-B668-4C60-9176-3ED02A43971C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF9566D8-B668-4C60-9176-3ED02A43971C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF9566D8-B668-4C60-9176-3ED02A43971C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{FFDB738E-E847-45BD-AD8D-E8DB7DD16E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FFDB738E-E847-45BD-AD8D-E8DB7DD16E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FFDB738E-E847-45BD-AD8D-E8DB7DD16E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169E9C97-AAA6-423A-8014-6004E857D1EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169E9C97-AAA6-423A-8014-6004E857D1EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169E9C97-AAA6-423A-8014-6004E857D1EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169E9C97-AAA6-423A-8014-6004E857D1EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
