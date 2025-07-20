@@ -10,7 +10,7 @@ namespace JuniorPharon.Models
         public string Location { get; set; }
         public float Price { get; set; }
         
-       // public DateTime StartDate { get; set; }
+        // public DateTime StartDate { get; set; }
         // public DateTime EndDate { get; set; }
         
         public int DurationInDays { get; set; } // trip duration
