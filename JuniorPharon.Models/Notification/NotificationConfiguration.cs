@@ -10,7 +10,7 @@ public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
         builder.HasKey(n => n.Id);
         builder.Property(n => n.CreatedAt).HasDefaultValue(DateTime.Now);
         builder.Property(n => n.IsRead).HasDefaultValue(false);
-        builder.Property(n => n.Message).IsRequired();
+        builder.Property(n => n.Description).IsRequired();
         builder.Property(n => n.UserId).IsRequired();
         builder.Property(n => n.Type).IsRequired();
         

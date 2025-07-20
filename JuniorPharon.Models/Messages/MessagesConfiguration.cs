@@ -11,6 +11,8 @@ public class MessagesConfiguration : IEntityTypeConfiguration<Messages>
         builder.Property(m => m.Message ).HasColumnType("nvarchar(MAX)");
         builder.Property(m => m.SentAt).HasDefaultValue(DateTime.Now);
         
-        
+        builder.HasOne(m => m.Chat)
+            .WithMany(c => c.Messages)
+            .HasForeignKey(m => m.ChatId);
     }
 }

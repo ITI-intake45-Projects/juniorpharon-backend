@@ -23,6 +23,7 @@ namespace JuniorPharon.Models
         
         public virtual Trips Trip { get; set; }
         public virtual User Client { get; set; }
-
+        
+        public virtual Payment Payment { get; set; }
     }
 }

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Infrastructure.SqlServer\Infrastructure.SqlServer.csproj" />
+    <ProjectReference Include="..\JuniorPharon.ViewModels\JuniorPharon.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
