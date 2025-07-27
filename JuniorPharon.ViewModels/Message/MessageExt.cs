@@ -5,7 +5,7 @@ namespace JuniorPharon.ViewModels
 {
     public static class MessageExt
     {
-        public static Message ToModel(this MessageCreateVM vm)
+        public static Message ToCreate(this MessageCreateVM vm)
         {
             return new Message
             {
@@ -16,7 +16,7 @@ namespace JuniorPharon.ViewModels
                 SentAt = DateTime.Now
             };
         }
-        public static MessageDetailsVM ToDetailsVM(this Message message, string currentUserId)
+        public static MessageDetailsVM ToDetails(this Message message, string currentUserId)
         {
             return new MessageDetailsVM
             {
@@ -36,7 +36,7 @@ namespace JuniorPharon.ViewModels
         }
 
         // Create Edit
-        public static Message ToEditModel(this MessageEditVM newmessage, Message oldmessage)
+        public static Message ToEdit(this MessageEditVM newmessage, Message oldmessage)
         {
             if (!string.IsNullOrWhiteSpace(newmessage.Content) && newmessage.Content != oldmessage.Content)
             {

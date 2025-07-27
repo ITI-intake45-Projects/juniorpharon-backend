@@ -9,7 +9,7 @@ namespace JuniorPharon.ViewModels
 {
     public static class ChatExt
     {
-        public static Chat ToCreateModel(this ChatCreateVM chatCreateVM)
+        public static Chat ToCreate(this ChatCreateVM chatCreateVM)
         {
             return new Chat
             {
@@ -19,7 +19,7 @@ namespace JuniorPharon.ViewModels
                 StartDate = DateTime.Now
             };
         }
-        public static ChatDetailsVM ToDetailsVM(this Chat chat, string _senderID, string _lastMessage, DateTime _messageDate)
+        public static ChatDetailsVM ToDetails(this Chat chat, string _senderID, string _lastMessage, DateTime _messageDate)
         {
             return new ChatDetailsVM
             {

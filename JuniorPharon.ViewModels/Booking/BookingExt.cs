@@ -6,7 +6,7 @@ namespace JuniorPharon.ViewModels
 {
     public static class BookingExt
     {
-        public static Booking ToCreateModel(this BookingCreateVM vm)
+        public static Booking ToCreate(this BookingCreateVM vm)
         {
             return new Booking
             {
@@ -16,7 +16,7 @@ namespace JuniorPharon.ViewModels
                 NumberOfPeople = vm.NumberOfPeople
             };
         }
-        public static BookingDetailsVM ToDetailsVM(this Booking booking)
+        public static BookingDetailsVM ToDetails(this Booking booking)
         {
             return new BookingDetailsVM
             {
@@ -30,11 +30,11 @@ namespace JuniorPharon.ViewModels
                 DurationInDays = booking.DurationInDays,
                 TripId = booking.TripId,
                 ClientId = booking.ClientId,
-                TripTitle = booking.Trip?.Title ?? string.Empty,
+                //TripTitle = booking.Trip?.TripContents.FirstOrDefault() ?? string.Empty,
                 ClientName = booking.Client?.FirstName +" "+ booking.Client?.LastName ?? string.Empty
             };
         }
-        public static Booking ToEditVM(this BookingEditVM newModel, Booking oldModel)
+        public static Booking ToEdit(this BookingEditVM newModel, Booking oldModel)
         {
             oldModel.StartDate = newModel.StartDate == default ? oldModel.StartDate : newModel.StartDate;
             oldModel.NumberOfPeople = newModel.NumberOfPeople == 0 ? oldModel.NumberOfPeople : newModel.NumberOfPeople;

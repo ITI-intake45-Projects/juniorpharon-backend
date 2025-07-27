@@ -16,7 +16,7 @@ namespace JuniorPharon.ViewModels
         public int DurationInDays { get; set; }
         public int TripId { get; set; } 
         public string ClientId { get; set; } 
-        public string TripTitle { get; set; }
+        //public string TripTitle { get; set; }
         public string ClientName { get; set; }
 
     }

@@ -20,5 +20,7 @@ namespace JuniorPharon.Models
         public virtual Trip Trip { get; set; }
         public virtual User Client { get; set; }
         public virtual Payment Payment { get; set; }
+        
+        public virtual 
     }
 }
