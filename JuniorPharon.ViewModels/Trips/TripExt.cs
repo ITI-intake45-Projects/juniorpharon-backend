@@ -34,7 +34,9 @@ namespace JuniorPharon.ViewModels
                 DurationInDays = trip.DurationInDays,
                 CreatedByUserId = trip.CreatedBy,
                 CreatedAt = trip.CreatedAt,
-                Rating = trip.Reviews
+                Rating = trip.Reviews.Any() ? trip.Reviews.Average(r => r.Rating) : 0,
+                TripContents = trip.TripContents.Select(c => c.ToDetails()).ToList(),
+                TripImages = trip.TripImages.Select(img => img.ToDetails()).ToList()
             };
         }
     }

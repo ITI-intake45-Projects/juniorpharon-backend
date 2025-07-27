@@ -19,7 +19,7 @@ namespace JuniorPharon.ViewModels
 
         public List<TripContentDetailsVM> TripContents { get; set; } 
         //public List<string> TripImages { get; set; } 
-        public List<TripDetailsVM> TripImages { get; set; }
+        public List<TripImageDetailsVM> TripImages { get; set; }
 
     }
 }

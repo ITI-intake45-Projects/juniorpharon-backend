@@ -21,6 +21,6 @@ namespace JuniorPharon.Models
         public virtual User Client { get; set; }
         public virtual Payment Payment { get; set; }
         
-        public virtual 
+         
     }
 }
