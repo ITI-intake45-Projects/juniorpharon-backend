@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JuniorPharon.Models;
 
-public class TripImagesConfiguration : IEntityTypeConfiguration<TripImages>
+public class TripImageConfiguration : IEntityTypeConfiguration<TripImage>
 {
-    public void Configure(EntityTypeBuilder<TripImages> builder)
+    public void Configure(EntityTypeBuilder<TripImage> builder)
     {
         builder.HasKey(img => img.Id);
         builder.Property(img => img.ImageUrl).IsRequired();

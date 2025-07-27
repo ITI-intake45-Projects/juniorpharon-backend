@@ -10,19 +10,19 @@ public class DBContext : IdentityDbContext<User>
     {
         
     }
-    public virtual DbSet<TripImages> TripImages { get; set; }
-    public virtual DbSet<Reviews> Reviews { get; set; }
-    public virtual DbSet<Bookings> Bookings { get; set; }
-    public virtual DbSet<Messages> Messages { get; set; }
+    public virtual DbSet<TripImage> TripImages { get; set; }
+    public virtual DbSet<Review> Reviews { get; set; }
+    public virtual DbSet<Booking> Bookings { get; set; }
+    public virtual DbSet<Message> Messages { get; set; }
     public virtual DbSet<Notification> Notification { get; set; }
     public virtual DbSet<Chat> Chat { get; set; }
-    public virtual DbSet<Trips> Trips { get; set; }
+    public virtual DbSet<Trip> Trips { get; set; }
     public virtual DbSet<Payment> Payment { get; set; }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.ApplyConfigurationsFromAssembly(typeof(BookingsConfiguration).Assembly);
+        builder.ApplyConfigurationsFromAssembly(typeof(BookingConfiguration).Assembly);
     }
     
 }

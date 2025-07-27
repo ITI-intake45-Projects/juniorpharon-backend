@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace JuniorPharon.Models;
 
 
-public class BookingsConfiguration : IEntityTypeConfiguration<Bookings>
+public class BookingConfiguration : IEntityTypeConfiguration<Booking>
 {
-    public void Configure(EntityTypeBuilder<Bookings> builder)
+    public void Configure(EntityTypeBuilder<Booking> builder)
     {
         builder.HasKey(bookings => bookings.Id);
         builder.Property(bookings => bookings.BookDate).HasColumnType("date").HasDefaultValue(DateTime.Now);

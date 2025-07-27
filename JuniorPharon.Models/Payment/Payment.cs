@@ -9,7 +9,7 @@ public class Payment
     public bool IsDone { get; set; } = false;
 
     public int BookingId { get; set; } // FK to Booking
-    public virtual Bookings Booking { get; set; }
+    public virtual Booking Booking { get; set; }
 
     public string ClientId { get; set; }  // Optional if you want to track who paid
     public virtual User Client { get; set; }

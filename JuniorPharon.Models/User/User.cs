@@ -29,11 +29,11 @@ namespace JuniorPharon.Models
         public string? ProfileImgUrl { get; set; }
         
         // Relations
-        public virtual ICollection<Trips> Trips { get; set; }
-        public virtual ICollection<Bookings> Bookings { get; set; }
-        public virtual ICollection<Reviews> Reviews { get; set; }
-        public virtual ICollection<Messages> SentMessages { get; set; }
-        public virtual ICollection<Messages> ReceivedMessages { get; set; }
+        public virtual ICollection<Trip> Trips { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Message> SentMessages { get; set; }
+        public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
     }

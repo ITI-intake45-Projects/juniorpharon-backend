@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JuniorPharon.Models;
 
-public class ReviewsConfiguration : IEntityTypeConfiguration<Reviews>
+public class ReviewConfiguration : IEntityTypeConfiguration<Review>
 {
-    public void Configure(EntityTypeBuilder<Reviews> builder)
+    public void Configure(EntityTypeBuilder<Review> builder)
     {
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Comment).IsRequired();

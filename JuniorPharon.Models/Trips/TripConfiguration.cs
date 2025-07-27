@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JuniorPharon.Models;
 
-public class TripsConfiguration : IEntityTypeConfiguration<Trips>
+public class TripConfiguration : IEntityTypeConfiguration<Trip>
 {
-    public void Configure(EntityTypeBuilder<Trips> builder)
+    public void Configure(EntityTypeBuilder<Trip> builder)
     {
         builder.HasKey(t => t.Id);
-        builder.Property(t => t.Title).IsRequired();
+        builder.Property(t => t.Title);
         builder.Property(t => t.Description).IsRequired();
         builder.Property(t => t.DurationInDays).IsRequired();
         builder.Property(t => t.CreatedAt).HasDefaultValue(DateTime.Now);

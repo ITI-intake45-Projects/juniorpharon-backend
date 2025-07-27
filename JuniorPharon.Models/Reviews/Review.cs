@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JuniorPharon.Models
 {
-    public class Reviews
+    public class Review
     {
         public int Id { get; set; }
         public string Comment { get; set; }
@@ -16,7 +16,7 @@ namespace JuniorPharon.Models
         public virtual int TripId { get; set; }
         public virtual string ClientId { get; set; }
         
-        public virtual Trips Trip { get; set; }
+        public virtual Trip Trip { get; set; }
         public virtual User Client { get; set; }
     }
 }

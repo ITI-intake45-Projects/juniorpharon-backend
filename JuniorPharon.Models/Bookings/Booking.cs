@@ -3,27 +3,22 @@ using JuniorPharon.Models.Enums;
 
 namespace JuniorPharon.Models
 {
-    public class Bookings
+    public class Booking
     {
         public int Id { get; set; }
-        public DateTime BookDate { get; set; }
+        public DateTime BookDate { get; set; } = DateTime.Now;
         public BookingStatus Status { get; set; }
         public int NumberOfPeople { get; set; }
         public decimal TotalPrice { get; set; }
         public DateTime StartDate { get; set; }
-        
-        public DateTime EndDate  {get;set;}
-        
-        
-        // [NotMapped]
+        public DateTime? EndDate  {get;set;}
         public int DurationInDays => Trip.DurationInDays;
 
+        // [NotMapped]
         public int TripId { get; set; } //fk
         public string ClientId { get; set; } //fk
-        
-        public virtual Trips Trip { get; set; }
+        public virtual Trip Trip { get; set; }
         public virtual User Client { get; set; }
-        
         public virtual Payment Payment { get; set; }
     }
 }
