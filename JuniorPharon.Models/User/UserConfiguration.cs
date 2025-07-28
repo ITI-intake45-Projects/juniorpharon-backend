@@ -33,9 +33,13 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(m => m.ReceiverId);
         
         builder.HasMany(b => b.Notifications)
-            .WithOne(n => n.User)
-            .HasForeignKey(n => n.UserId);
-        
+            .WithOne(n => n.Sender)
+            .HasForeignKey(n => n.SenderId);
+
+        builder.HasMany(b => b.Notifications)
+            .WithOne(n => n.Receiver)
+            .HasForeignKey(n => n.ReceiverId);
+
         builder.HasMany(b => b.Trips)
             .WithOne(t => t.CreatedByUser)
             .HasForeignKey(t => t.CreatedBy);

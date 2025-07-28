@@ -1,24 +1,20 @@
 ﻿
 
 using JuniorPharon.Models.Enums;
-using System.ComponentModel.DataAnnotations;
 
 namespace JuniorPharon.ViewModels
 {
-    public class NotificationCreateVM
+    public class NotificationDetailsVM
     {
-        [Required(ErrorMessage = "Description is required.")]
+        public int Id { get; set; }
         public string Description { get; set; }
-
-        [Required(ErrorMessage = "Title is required.")]
         public string Title { get; set; }
-
-        [Required(ErrorMessage = "Type is required.")]
         public NotificationType Type { get; set; }
-
-        [Required(ErrorMessage = "UserId is required.")]
+        public DateTime CreatedAt { get; set; }
+        public bool IsRead { get; set; }
         public string RecieverId { get; set; }
         public string? SenderId { get; set; }
-
+        public string? SenderName { get; set; }
+        public string? SenderImage { get; set; }
     }
 }
