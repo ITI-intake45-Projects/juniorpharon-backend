@@ -10,6 +10,8 @@ namespace JuniorPharon.Models
         public BookingStatus Status { get; set; }
         public int NumberOfPeople { get; set; }
         public decimal TotalPrice { get; set; }
+
+        public DateTime? CancelDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate  {get;set;}
         public int DurationInDays => Trip.DurationInDays;
