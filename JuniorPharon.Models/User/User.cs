@@ -14,7 +14,7 @@ namespace JuniorPharon.Models
         public int? Age { get; set; }
         public string? ProfileImg { get; set; }
         public Gender? Gender { get; set; }
-        public Roles  Role { get; set; }
+        //public Roles  Role { get; set; }
         public DateTime? ModificationDate { get; set; }
         public DateTime? CreationDate { get; set; }
         public bool? IsDeleted { get; set; }     
@@ -28,5 +28,8 @@ namespace JuniorPharon.Models
         public virtual ICollection<Message> ReceivedMessages { get; set; }
         public virtual ICollection<Notification> Notifications { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
+
+        public virtual Admin? Admin { get; set; }
+        public virtual Client? Client { get; set; }
     }
 }

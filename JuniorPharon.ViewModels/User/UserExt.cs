@@ -10,7 +10,7 @@ namespace JuniorPharon.ViewModels
         {
             return new User
             {
-                UserName = vm.Email,
+                UserName = vm.UserName,
                 Email = vm.Email,
                 FirstName = vm.FirstName,
                 LastName = vm.LastName,
@@ -19,7 +19,6 @@ namespace JuniorPharon.ViewModels
                 City = vm.City,
                 Nationality = vm.Nationality,
                 Age = vm.Age,
-                Role = vm.Role,
                 CreationDate = DateTime.Now,
                 IsActive = true,
                 IsDeleted = false
@@ -42,7 +41,7 @@ namespace JuniorPharon.ViewModels
                 CurrentCountry = user.CurrentCountry,
                 CreationDate = user.CreationDate,
                 NationalId = user.NationalId,
-                Role = user.Role
+                //Role = user.Role
             };
         }
 

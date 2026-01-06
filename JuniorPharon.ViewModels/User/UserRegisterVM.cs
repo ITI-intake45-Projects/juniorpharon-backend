@@ -40,6 +40,7 @@ namespace JuniorPharon.ViewModels
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        public Roles Role { get; set; } = Roles.Client;
+        [Required(ErrorMessage = "Role is required.")]
+        public string Role { get; set; } 
     }
 }

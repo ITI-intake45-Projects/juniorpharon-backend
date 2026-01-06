@@ -11,11 +11,22 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
 
-        builder.Property(b => b.Role).HasDefaultValue(Roles.Client);
+        //builder.Property(b => b.Role).HasDefaultValue(Roles.Client);
         builder.Property(b => b.ModificationDate).HasDefaultValue(DateTime.Now);
         builder.Property(b => b.CreationDate).HasDefaultValue(DateTime.Now);
-        
-        
+
+        builder.HasKey(x => x.Id);
+
+        builder.HasOne(u => u.Admin)
+            .WithOne(a => a.User)
+            .HasForeignKey<Admin>(a => a.UserId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasOne(u => u.Client)
+           .WithOne(a => a.User)
+           .HasForeignKey<Client>(a => a.UserId)
+           .OnDelete(DeleteBehavior.NoAction);
+
         builder.HasMany(b => b.Bookings)
             .WithOne(u => u.Client)
             .HasForeignKey(b => b.ClientId);
