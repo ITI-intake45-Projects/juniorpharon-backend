@@ -35,7 +35,7 @@ namespace JuniorPharon.ViewModels
         //public List<string> TripPath { get; set; } = new();
 
         //public IFormFileCollection? TripImages { get; set; }  // Optional — use [Required] if needed
-        public List<TripImageCreateVM> TripImages { get; set; }    
+        public List<TripImageCreateVM> TripImages { get; set; }
     }
 
 }

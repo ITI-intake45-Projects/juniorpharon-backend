@@ -18,7 +18,8 @@ public class DBContext : IdentityDbContext<User>
     public virtual DbSet<Chat> Chat { get; set; }
     public virtual DbSet<Trip> Trips { get; set; }
     public virtual DbSet<Payment> Payment { get; set; }
-    
+    public virtual DbSet<Admin> Admins { get; set; }
+    public virtual DbSet<Client> Clients { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

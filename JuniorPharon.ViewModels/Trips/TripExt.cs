@@ -6,7 +6,7 @@ namespace JuniorPharon.ViewModels
     public static class TripExt
     {
         
-        public static Trip ToCreate(this TripCreateVM TripVm , List<string> imgUrls)
+        public static Trip ToCreate(this TripCreateVM TripVm )
         {
             return new Trip
             { 
@@ -18,8 +18,8 @@ namespace JuniorPharon.ViewModels
                 CreatedBy = TripVm.CreatedByUserId,
                 TripContents = TripVm.TripContents.Select(c => c.ToCreate()).ToList(),
                 //TripImages = TripVm.TripPath.Select(p => new TripImage { ImageUrl = p }).ToList(),
-                TripImages = TripVm.TripImages.Select((imgVm , index)
-                => imgVm.ToCreate(imgUrls[index])).ToList() 
+                //TripImages = TripVm.TripImages.Select((imgVm , index)
+                //=> imgVm.ToCreate(imgUrls[index])).ToList() 
               
             };
         }
