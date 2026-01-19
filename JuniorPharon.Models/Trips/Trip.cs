@@ -16,7 +16,7 @@ namespace JuniorPharon.Models
         public string CreatedBy { get; set; }//fk owner
         public DateTime CreatedAt { get; set; }
 
-        public string ImgCover { get; set; }
+        //public string ImgCover { get; set; }
         
         //Relation
         

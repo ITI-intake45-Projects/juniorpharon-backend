@@ -34,25 +34,84 @@ namespace JuniorPharon.Services
                 {
                     var imageUrl = await UploadMedia.AddImageAsync(imgVm.Image);
 
-                    //tripImages.Add(new TripImage
-                    //{
-                    //    ImageUrl = imageUrl,
-                        
-                    //});
-                }
-                //vm.studentPayment.EnrollmentId = enrollment.Id;
+                    trip.TripImages.Add(imgVm.ToCreate(imageUrl));
 
-                //await _unitOfWork._tripRepository.UpdateAsync(vm.studentPayment.ToCreate());
+                }
+
+                await _unitOfWork._tripRepository.AddAsync(trip);
+                await _unitOfWork.SaveChangesAsync();
 
                 return ServiceResult.SuccessResult("Trip created successfully.", HttpStatusCode.Created);
             }
 
             catch (Exception ex)
             {
-                return ServiceResult.FailureResult($"An error occurred while creating the subscription plan: {ex.Message}", HttpStatusCode.InternalServerError);
-
-
+                return ServiceResult.FailureResult($"An error occurred while creating the trip: {ex.Message}", HttpStatusCode.InternalServerError);
             }
         }
+
+        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> SearchTrip(string? location = "",
+           string? city = "",
+           float? minPrice = null,
+           float? maxPrice = null,
+           int? durationInDays = null,
+           float? rating = null,
+           bool descending = false,
+           int pageSize = 10,
+           int pageIndex = 1)
+        {
+            try
+            {
+                var trips = await _unitOfWork._tripRepository.SearchTripDetails(
+                    location, city, minPrice, maxPrice, durationInDays, rating, descending, pageSize, pageIndex);
+
+                return ServiceResult<PaginationVM<TripDetailsVM>>.SuccessResult(trips, "Trips retrieved successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return ServiceResult<PaginationVM<TripDetailsVM>>.FailureResult(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> GetAllTrips()
+        {
+            try
+            {
+                var trips = await _unitOfWork._tripRepository.GetAllTripsAsync();
+
+                return ServiceResult<PaginationVM<TripDetailsVM>>.SuccessResult(trips, "Enrollments retrieved successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return ServiceResult<PaginationVM<TripDetailsVM>>.FailureResult(ex.Message);
+            }
+        }
+
+        public async Task<ServiceResult<TripDetailsVM>> GetTripById(int id)
+        {
+            try
+            {
+                var trip = _unitOfWork._tripRepository
+                    .GetList(e => e.Id == id)
+                    .FirstOrDefault();
+
+                if (trip == null)
+                {
+                    return ServiceResult<TripDetailsVM>.FailureResult("Trip not found.");
+                }
+
+                var result = trip.ToDetails();
+
+                return ServiceResult<TripDetailsVM>.SuccessResult(result, "Enrollment retrieved successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                return ServiceResult<TripDetailsVM>.FailureResult(ex.Message);
+            }
+        }
+
     }
 }

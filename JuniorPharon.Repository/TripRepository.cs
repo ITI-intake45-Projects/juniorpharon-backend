@@ -61,5 +61,26 @@ namespace JuniorPharon.Repository
                 throw;
             }
         }
+
+        public async Task<PaginationVM<TripDetailsVM>> GetAllTripsAsync(
+       int pageSize = 10,
+       int pageIndex = 1)
+        {
+            try
+            {
+                return await SearchAsync(
+                    null,                          // no filter (يعني هات الكل)
+                    m => m.CreatedAt,              // order by StartDate
+                    m => m.ToDetails(),            // projection
+                    false,                         // ascending
+                    pageSize,
+                    pageIndex
+                );
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

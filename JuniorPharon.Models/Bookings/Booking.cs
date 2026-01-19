@@ -14,7 +14,15 @@ namespace JuniorPharon.Models
         public DateTime? CancelDate { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate  {get;set;}
-        public int DurationInDays => Trip.DurationInDays;
+
+        [NotMapped]
+        public int DurationInDays => Trip?.DurationInDays ?? 0;
+
+        [NotMapped]
+        public DateTime? CalculatedEndDate =>
+    StartDate.AddDays(DurationInDays);
+
+        //public int DurationInDays => Trip.DurationInDays;
 
         // [NotMapped]
         public int TripId { get; set; } //fk

@@ -26,7 +26,8 @@ namespace JuniorPharon.Models
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<Message> SentMessages { get; set; }
         public virtual ICollection<Message> ReceivedMessages { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
+        public virtual ICollection<Notification> SentNotifications { get; set; }
+        public virtual ICollection<Notification> ReceivedNotifications { get; set; }
         public virtual ICollection<Payment> Payments { get; set; }
 
         public virtual Admin? Admin { get; set; }

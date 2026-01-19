@@ -9,12 +9,12 @@ public class ChatConfiguration : IEntityTypeConfiguration<Chat>
     {
         builder.HasKey(c => c.Id);
 
-        builder.HasOne(c => c.SenderId)
+        builder.HasOne(c => c.Sender)
             .WithMany()
             .HasForeignKey(c => c.SenderId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne(c => c.RecieverId)
+        builder.HasOne(c => c.Reciever)
             .WithMany()
             .HasForeignKey(c => c.RecieverId)
             .OnDelete(DeleteBehavior.Restrict);

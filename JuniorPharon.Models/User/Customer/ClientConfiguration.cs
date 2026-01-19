@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace JuniorPharon.Models
 {
-    public class ClientConfiguration : IEntityTypeConfiguration<Admin>
+    public class ClientConfiguration : IEntityTypeConfiguration<Client>
     {
-        public void Configure(EntityTypeBuilder<Admin> builder)
+        public void Configure(EntityTypeBuilder<Client> builder)
         {
             builder.HasKey(x => x.UserId);
 

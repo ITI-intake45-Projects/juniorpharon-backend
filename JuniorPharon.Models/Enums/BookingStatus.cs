@@ -2,8 +2,8 @@ namespace JuniorPharon.Models.Enums;
 
 public enum BookingStatus
 {
-    Pending,
-    Confirmed,
-    Done,
-    Cancelled,
+    Pending = 0,
+    Confirmed = 1,
+    Done = 2,
+    Cancelled = 3,
 }

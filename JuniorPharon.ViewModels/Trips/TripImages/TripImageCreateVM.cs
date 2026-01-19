@@ -7,6 +7,6 @@ namespace JuniorPharon.ViewModels
     {
         public IFormFile Image {  get; set; }
 
-        public bool IsCover { get; set; }
+        public bool IsCover { get; set; } = false;
     }
 }

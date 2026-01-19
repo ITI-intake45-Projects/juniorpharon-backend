@@ -1,4 +1,4 @@
-using JuniorPharon.Models.Enums;
+﻿using JuniorPharon.Models.Enums;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -37,19 +37,25 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder.HasMany(b => b.SentMessages)
             .WithOne(m => m.Sender)
-            .HasForeignKey(m => m.SenderId);
-        
+            .HasForeignKey(m => m.SenderId)
+            .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
+
+
         builder.HasMany(b => b.ReceivedMessages)
             .WithOne(m => m.Receiver)
-            .HasForeignKey(m => m.ReceiverId);
-        
-        builder.HasMany(b => b.Notifications)
-            .WithOne(n => n.Sender)
-            .HasForeignKey(n => n.SenderId);
+            .HasForeignKey(m => m.ReceiverId)
+            .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
 
-        builder.HasMany(b => b.Notifications)
+
+        builder.HasMany(u => u.SentNotifications)
+     .WithOne(n => n.Sender)
+     .HasForeignKey(n => n.SenderId)
+     .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasMany(u => u.ReceivedNotifications)
             .WithOne(n => n.Receiver)
-            .HasForeignKey(n => n.ReceiverId);
+            .HasForeignKey(n => n.ReceiverId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(b => b.Trips)
             .WithOne(t => t.CreatedByUser)
