@@ -127,7 +127,7 @@ namespace JuniorPharon.Repository
             {
 
 
-                return filter != null ? Table.Where(filter) : Table;
+                return  filter != null ? Table.Where(filter) : Table;
             }
             catch
             {

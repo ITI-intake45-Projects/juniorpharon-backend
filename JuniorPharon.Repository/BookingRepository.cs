@@ -2,6 +2,7 @@
 using JuniorPharon.Models;
 using JuniorPharon.Models.Enums;
 using JuniorPharon.ViewModels;
+using LinqKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,57 +42,47 @@ namespace JuniorPharon.Repository
 
 
 
-        //public async Task<PaginationVM<EnrollmentListVM>> SearchEnrollmentList(
-        //   string? studentId = "",
-        //   string? teacherId = "",
-        //   DateTime? startdate = null,
-        //   int? day = null,
-        //   EnrollmentStatus? status = null,
-        //   bool descending = false,
-        //   int pageSize = 10,
-        //   int pageIndex = 1)
-        //{
-        //    try
-        //    {
+        public async Task<PaginationVM<BookingDetailsVM>> SearchBookingDetails(
+      string? userId = null,
+      DateTime? bookingDate = null,
+      DateTime? startDate = null,
+      BookingStatus? status = null,
+      bool descending = false,
+      int pageSize = 10,
+      int pageIndex = 1)
+        {
+            try
+            {
+                var predicate = PredicateBuilder.New<Booking>(true);
 
-        //        var predicate = PredicateBuilder.New<Enrollment>(true);
+                if (!string.IsNullOrWhiteSpace(userId))
+                    predicate = predicate.And(b => b.ClientId == userId);
 
-        //        if (!string.IsNullOrEmpty(studentId))
-        //            predicate = predicate.And(m => m.StudentId == studentId);
+                if (bookingDate.HasValue)
+                    predicate = predicate.And(b =>
+                        b.BookDate.Date == bookingDate.Value.Date);
 
-        //        if (!string.IsNullOrEmpty(teacherId))
-        //            predicate = predicate.And(m => m.TeacherId == teacherId);
+                if (startDate.HasValue)
+                    predicate = predicate.And(b =>
+                        b.StartDate.Date >= startDate.Value.Date);
 
-        //        if (startdate.HasValue)
-        //        {
-        //            var year = startdate.Value.Year;
-        //            var month = startdate.Value.Month;
+                if (status.HasValue)
+                    predicate = predicate.And(b => b.Status == status.Value);
 
-        //            // دايماً بالسنة والشهر
-        //            predicate = predicate.And(m => m.StartDate.Year == year && m.StartDate.Month == month);
-
-        //            // لو اليوم اتبعت
-        //            if (day.HasValue)
-        //            {
-        //                predicate = predicate.And(m => m.StartDate.Day == day.Value);
-        //            }
-
-
-        //        }
-
-        //        if (status.HasValue)
-        //            predicate = predicate.And(m => m.Status == status.Value);
-
-
-
-
-        //        return await SearchAsync(predicate, m => m.StartDate, m => m.ToList(), false, pageSize, pageIndex);
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
+                return await SearchAsync(
+                    predicate,
+                    orderBy: b => b.BookDate,   // أو BookingDate
+                    selector: b => b.ToDetails(),
+                    descending: descending,
+                    pageSize: pageSize,
+                    pageIndex: pageIndex
+                );
+            }
+            catch
+            {
+                throw;
+            }
+        }
 
 
         public async Task<PaginationVM<BookingDetailsVM>> SearchBookingsByClientId(
