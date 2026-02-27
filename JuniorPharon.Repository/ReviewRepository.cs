@@ -16,20 +16,20 @@ namespace JuniorPharon.Repository
         }
 
 
-        public async Task<List<ReviewDetailsVM>> GetRreviewsByTripIdAsync(int tripId)
+        public async Task<List<Review>> GetRreviewsByTripIdAsync(int tripId)
         {
             try
             {
                 // Fetch data from DB (EF part)
                 //var enrollments =  GetList(e => e.TeacherId == teacherId && e.Status == EnrollmentStatus.Active)
-                var reviews = GetList(e => e.TripId == tripId);
+                var reviews = GetList(e => e.TripId == tripId).ToList();
 
 
 
                 // Map using your extension method (in-memory)
                 //return await GetList(e => e.TeacherId == teacherId).Select(e => e.Student.ToList()).ToListAsync();
                 //
-                return reviews.Select(e => e.ToDetails()).ToList();
+                return reviews;
             }
             catch
             {

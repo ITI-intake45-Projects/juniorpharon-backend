@@ -26,16 +26,17 @@ namespace JuniorPharon.ViewModels
         [Range(1, 365, ErrorMessage = "Duration must be between 1 and 365 days.")]
         public int DurationInDays { get; set; }
 
-        [Required(ErrorMessage = "Trip content in at least one language is required.")]
-        [MinLength(1, ErrorMessage = "You must provide at least one TripContent.")]
+        //[Required(ErrorMessage = "Trip content in at least one language is required.")]
+        //[MinLength(1, ErrorMessage = "You must provide at least one TripContent.")]
         public List<TripContentCreateVM> TripContents { get; set; }
 
-        [Required(ErrorMessage = "Trip path is required.")]
-        [MinLength(1, ErrorMessage = "Trip path must contain at least one location.")]
+        //[Required(ErrorMessage = "Trip path is required.")]
+        //[MinLength(1, ErrorMessage = "Trip path must contain at least one location.")]
         //public List<string> TripPath { get; set; } = new();
 
         //public IFormFileCollection? TripImages { get; set; }  // Optional — use [Required] if needed
-        public List<TripImageCreateVM> TripImages { get; set; }
+       // optional for test
+        public List<TripImageCreateVM>? TripImages { get; set; }
     }
 
 }

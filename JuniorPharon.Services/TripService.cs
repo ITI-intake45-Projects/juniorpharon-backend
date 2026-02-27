@@ -74,11 +74,11 @@ namespace JuniorPharon.Services
             }
         }
 
-        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> GetAllTrips()
+        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> GetAllTrips(int pageSize,int pageIndex)
         {
             try
             {
-                var trips = await _unitOfWork._tripRepository.GetAllTripsAsync();
+                var trips = await _unitOfWork._tripRepository.GetAllTripsAsync(pageSize , pageIndex);
 
                 return ServiceResult<PaginationVM<TripDetailsVM>>.SuccessResult(trips, "Enrollments retrieved successfully.");
             }

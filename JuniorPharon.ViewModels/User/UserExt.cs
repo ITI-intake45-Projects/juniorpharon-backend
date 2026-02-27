@@ -19,6 +19,7 @@ namespace JuniorPharon.ViewModels
                 City = vm.City,
                 Nationality = vm.Nationality,
                 Age = vm.Age,
+                ProfileImg = vm.ProfileImg,
                 CreationDate = DateTime.Now,
                 IsActive = true,
                 IsDeleted = false

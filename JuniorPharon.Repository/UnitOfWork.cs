@@ -8,6 +8,7 @@ namespace JuniorPharon.Repository
     public class UnitOfWork : IDisposable
     {
         public AdminRepository _adminRepository { get; private set; }
+        public ClientRepositoty _clientRepository { get; private set; }
         public UserRepository _userRepository { get; private set; }
         public BookingRepository _bookingRepository { get; private set; }
 

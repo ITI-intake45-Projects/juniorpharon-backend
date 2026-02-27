@@ -4,17 +4,17 @@ namespace Utilities
 {
     public class ServiceResult
     {
-        public bool Success { get; set; }
+        public bool IsSuccess { get; set; }
         public string Message { get; set; }
         public HttpStatusCode StatusCode { get; set; }
 
         public static ServiceResult SuccessResult(string message = "Success",
             HttpStatusCode statusCode = HttpStatusCode.OK) =>
-            new() { Success = true, Message = message, StatusCode = statusCode };
+            new() { IsSuccess = true, Message = message, StatusCode = statusCode };
 
         public static ServiceResult FailureResult(string message = "An error occurred.", 
             HttpStatusCode statusCode = HttpStatusCode.BadRequest) =>
-            new() { Success = false, Message = message, StatusCode = statusCode };
+            new() { IsSuccess = false, Message = message, StatusCode = statusCode };
     }
 
     public class ServiceResult<T> : ServiceResult
@@ -25,7 +25,7 @@ namespace Utilities
             HttpStatusCode statusCode = HttpStatusCode.OK) =>
             new ()
             {
-                Success = true,
+                IsSuccess = true,
                 Message = message,
                 StatusCode = statusCode,
                 Data = data
@@ -35,7 +35,7 @@ namespace Utilities
             HttpStatusCode statusCode = HttpStatusCode.BadRequest) =>
             new ()
             {
-                Success = false,
+                IsSuccess = false,
                 Message = message,
                 StatusCode = statusCode,
                 Data = default

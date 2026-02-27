@@ -18,8 +18,10 @@ namespace JuniorPharon.Models
         public DateTime? ModificationDate { get; set; }
         public DateTime? CreationDate { get; set; }
         public bool? IsDeleted { get; set; }     
-        public bool? IsActive { get; set; }  
-        
+        public bool? IsActive { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
+
         // Relations
         public virtual ICollection<Trip> Trips { get; set; }
         public virtual ICollection<Booking> Bookings { get; set; }

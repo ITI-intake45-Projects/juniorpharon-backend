@@ -39,8 +39,8 @@ namespace Infrastructure.SqlServer.Migrations
                     Age = table.Column<int>(type: "int", nullable: true),
                     ProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Gender = table.Column<int>(type: "int", nullable: true),
-                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(7917)),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(8206)),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 866, DateTimeKind.Local).AddTicks(632)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 866, DateTimeKind.Local).AddTicks(1210)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -239,7 +239,7 @@ namespace Infrastructure.SqlServer.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     IsRead = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 18, DateTimeKind.Local).AddTicks(7270)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 864, DateTimeKind.Local).AddTicks(3474)),
                     SenderId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     ReceiverId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
@@ -269,7 +269,7 @@ namespace Infrastructure.SqlServer.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     DurationInDays = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(2253))
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 865, DateTimeKind.Local).AddTicks(1517))
                 },
                 constraints: table =>
                 {
@@ -289,7 +289,7 @@ namespace Infrastructure.SqlServer.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Content = table.Column<string>(type: "nvarchar(MAX)", nullable: false),
-                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 18, DateTimeKind.Local).AddTicks(5408)),
+                    SentAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 863, DateTimeKind.Local).AddTicks(9775)),
                     IsEdited = table.Column<bool>(type: "bit", nullable: false),
                     EditedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SenderId = table.Column<string>(type: "nvarchar(450)", nullable: false),
@@ -323,7 +323,7 @@ namespace Infrastructure.SqlServer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookDate = table.Column<DateTime>(type: "date", nullable: false, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 17, DateTimeKind.Local).AddTicks(9308)),
+                    BookDate = table.Column<DateTime>(type: "date", nullable: false, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 863, DateTimeKind.Local).AddTicks(873)),
                     Status = table.Column<int>(type: "int", nullable: false),
                     NumberOfPeople = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -357,7 +357,7 @@ namespace Infrastructure.SqlServer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Rating = table.Column<float>(type: "real", nullable: false),
-                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(1147)),
+                    CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2026, 2, 26, 14, 9, 29, 864, DateTimeKind.Local).AddTicks(9699)),
                     TripId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },

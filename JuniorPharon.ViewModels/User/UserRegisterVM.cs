@@ -1,6 +1,7 @@
 ﻿
 
 using JuniorPharon.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace JuniorPharon.ViewModels
@@ -19,6 +20,11 @@ namespace JuniorPharon.ViewModels
         [Required(ErrorMessage = "Nationality is Required")]
         public string Nationality { get; set; }
 
+        public string? ProfileImg { get; set; }
+
+        [DataType(DataType.Upload)]
+        public IFormFile? ImageFile { get; set; }
+
         public string? CurrentCountry { get; set; }
         public string? City { get; set; }
         public int? Age { get; set; }
@@ -34,9 +40,11 @@ namespace JuniorPharon.ViewModels
         [Required(ErrorMessage = "Password is Required")]
         [StringLength(100, MinimumLength = 8, ErrorMessage = "Value Must be at least 8 Characters ")]
         [DataType(DataType.Password)]
-        [Compare("ConfirmPassowrd")]
+        [Compare("ConfirmPassword")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "ConfirmPassword is Required")]
+        [DataType(DataType.Password)]
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 

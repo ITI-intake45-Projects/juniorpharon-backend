@@ -35,10 +35,10 @@ namespace JuniorPharon.ViewModels
         }
 
         // Edit → Model update
-        //public static void UpdateFromEditVM(this Review model, ReviewEditVM vm)
-        //{
-        //    model.Comment = vm.Comment;
-        //    model.Rating = vm.Rating;
-        //}
+        public static void UpdateFromEditVM(this Review model, ReviewEditVM vm)
+        {
+            model.Comment = vm.Comment;
+            model.Rating = vm.Rating;
+        }
     }
 }

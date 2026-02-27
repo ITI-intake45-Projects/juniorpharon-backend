@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.SqlServer.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20260113203113_init")]
-    partial class init
+    [Migration("20260226203637_init2")]
+    partial class init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("BookDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("date")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 17, DateTimeKind.Local).AddTicks(9308));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 863, DateTimeKind.Local).AddTicks(408));
 
                     b.Property<DateTime?>("CancelDate")
                         .HasColumnType("datetime2");
@@ -158,7 +158,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("SentAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 18, DateTimeKind.Local).AddTicks(5408));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 863, DateTimeKind.Local).AddTicks(8781));
 
                     b.HasKey("Id");
 
@@ -182,7 +182,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 18, DateTimeKind.Local).AddTicks(7270));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(1505));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -285,7 +285,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(1147));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(6808));
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
@@ -317,7 +317,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(2253));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(8467));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -417,7 +417,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(8206));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 865, DateTimeKind.Local).AddTicks(6492));
 
                     b.Property<string>("CurrentCountry")
                         .HasColumnType("nvarchar(max)");
@@ -454,7 +454,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 1, 13, 22, 31, 13, 19, DateTimeKind.Local).AddTicks(7917));
+                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 865, DateTimeKind.Local).AddTicks(6019));
 
                     b.Property<string>("NationalId")
                         .HasColumnType("nvarchar(max)");
@@ -482,6 +482,12 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("ProfileImg")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
