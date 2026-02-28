@@ -14,7 +14,8 @@ namespace JuniorPharon.ViewModels
                 BookingId = vm.BookingId,
                 ClientId = vm.ClientId,
                 Amount = vm.Amount,
-                Currency = vm.Currency ?? "EGP" // Default to EGP if not provided
+                Currency = vm.Currency ?? "EGP", // Default to EGP if not provided
+                TransactionId = vm.TransactionId,
             };
         }
         public static PaymentDetailsVM ToDetails(this Payment payment)

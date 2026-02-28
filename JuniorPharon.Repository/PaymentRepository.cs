@@ -11,18 +11,23 @@ namespace JuniorPharon.Repository
         {
         }
 
-        public async Task<List<PaymentDetailsVM>> GetPaymentByClientIdAsync(string clientId)
+        public async Task<List<Payment>> GetPaymentByClientIdAsync(string clientId)
         {
             try
             {
                 // Fetch data from DB (EF part)
                 //var payments = GetList(e => e.ClientId == clientId).Select(p => p.ToDetails()).ToList();
 
+                if (string.IsNullOrEmpty(clientId))
+                {
+                    throw new ArgumentException("Client ID cannot be null or empty.", nameof(clientId));
+                }
 
+                var payments =  GetList(e => e.ClientId == clientId).ToList();
 
                 // Map using your extension method (in-memory)
 
-                return GetList(e => e.ClientId == clientId).Select(p => p.ToDetails()).ToList();
+                return payments;
             }
             catch
             {

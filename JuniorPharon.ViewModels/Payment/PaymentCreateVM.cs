@@ -16,5 +16,9 @@ namespace JuniorPharon.ViewModels
         [Required]
         public string Currency { get; set; } = "EGP"; // Default currency, editable
 
+        public string? TransactionId { get; set; }
+
+
+
     }
 }

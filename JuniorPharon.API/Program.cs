@@ -25,6 +25,8 @@ builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<TripService>();
 builder.Services.AddScoped<DashboardService>();
+builder.Services.AddScoped<PaymentService>();
+
 
 
 
