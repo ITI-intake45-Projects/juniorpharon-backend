@@ -2,11 +2,6 @@
 using JuniorPharon.Models;
 using JuniorPharon.ViewModels;
 using LinqKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JuniorPharon.Repository
 {
@@ -17,44 +12,72 @@ namespace JuniorPharon.Repository
         }
 
         public async Task<PaginationVM<TripDetailsVM>> SearchTripDetails(
-           string? location = "",
-           string? city = "",
-           float? minPrice = null,
-           float? maxPrice = null,
-           int? durationInDays = null,
-           float? rating = null,
-           bool descending = false,
-           int pageSize = 10,
-           int pageIndex = 1)
+            string? location = "",
+            string? city = "",
+            decimal? minPrice = null,
+            decimal? maxPrice = null,
+            int? durationInDays = null,
+            float? rating = null,
+            int peopleCount = 1, // 🔥 مهم
+            bool descending = false,
+            int pageSize = 10,
+            int pageIndex = 1)
         {
             try
             {
-
                 var predicate = PredicateBuilder.New<Trip>(true);
 
+                // 🔍 Filter: Location
                 if (!string.IsNullOrEmpty(location))
-                    predicate = predicate.And(m => m.Location == location);
+                    predicate = predicate.And(t => t.Location.Contains(location));
 
+                // 🔍 Filter: City
                 if (!string.IsNullOrEmpty(city))
-                    predicate = predicate.And(m => m.City == city);
+                    predicate = predicate.And(t => t.City.Contains(city));
 
+                // 💰 Filter: Price (من PricingTier)
                 if (minPrice.HasValue)
-                    predicate = predicate.And(t => t.Price >= minPrice.Value);
+                {
+                    predicate = predicate.And(t =>
+                        t.PricingTiers.Any(pt =>
+                            pt.MinPeople <= peopleCount &&
+                            pt.MaxPeople >= peopleCount &&
+                            pt.PricePerPerson >= minPrice.Value
+                        ));
+                }
 
                 if (maxPrice.HasValue)
-                    predicate = predicate.And(t => t.Price <= maxPrice.Value);
+                {
+                    predicate = predicate.And(t =>
+                        t.PricingTiers.Any(pt =>
+                            pt.MinPeople <= peopleCount &&
+                            pt.MaxPeople >= peopleCount &&
+                            pt.PricePerPerson <= maxPrice.Value
+                        ));
+                }
 
+                // ⏱ Duration
                 if (durationInDays.HasValue)
                     predicate = predicate.And(t => t.DurationInDays == durationInDays.Value);
 
+                // ⭐ Rating
                 if (rating.HasValue)
-                    predicate = predicate.And(t => t.Reviews.Average(r=> r.Rating) >= rating.Value);
+                {
+                    predicate = predicate.And(t =>
+                        t.Reviews.Any() &&
+                        t.Reviews.Average(r => r.Rating) >= rating.Value
+                    );
+                }
 
-
-
-
-
-                return await SearchAsync(predicate, m => m.DurationInDays, m => m.ToDetails(), false, pageSize, pageIndex);
+                // 🚀 Execute
+                return await SearchAsync(
+                    predicate,
+                    t => t.CreatedAt,                    // Order By
+                    t => t.ToDetails(peopleCount),       // Projection 👈 مهم
+                    descending,
+                    pageSize,
+                    pageIndex
+                );
             }
             catch
             {
@@ -62,17 +85,19 @@ namespace JuniorPharon.Repository
             }
         }
 
+        // 📦 Get All Trips
         public async Task<PaginationVM<TripDetailsVM>> GetAllTripsAsync(
-       int pageSize = 10,
-       int pageIndex = 1)
+            int peopleCount = 1, // 🔥 مهم
+            int pageSize = 10,
+            int pageIndex = 1)
         {
             try
             {
                 return await SearchAsync(
-                    null,                          // no filter (يعني هات الكل)
-                    m => m.CreatedAt,              // order by StartDate
-                    m => m.ToDetails(),            // projection
-                    false,                         // ascending
+                    null,
+                    t => t.CreatedAt,
+                    t => t.ToDetails(peopleCount), // 👈 مهم
+                    false,
                     pageSize,
                     pageIndex
                 );

@@ -35,27 +35,27 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(r => r.Client)
             .HasForeignKey(r => r.ClientId);
         
-        builder.HasMany(b => b.SentMessages)
-            .WithOne(m => m.Sender)
-            .HasForeignKey(m => m.SenderId)
-            .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
+        //builder.HasMany(b => b.SentMessages)
+        //    .WithOne(m => m.Sender)
+        //    .HasForeignKey(m => m.SenderId)
+        //    .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
 
 
-        builder.HasMany(b => b.ReceivedMessages)
-            .WithOne(m => m.Receiver)
-            .HasForeignKey(m => m.ReceiverId)
-            .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
+        //builder.HasMany(b => b.ReceivedMessages)
+        //    .WithOne(m => m.Receiver)
+        //    .HasForeignKey(m => m.ReceiverId)
+        //    .OnDelete(DeleteBehavior.NoAction); // 🔴 IMPORTANT
 
 
-        builder.HasMany(u => u.SentNotifications)
-     .WithOne(n => n.Sender)
-     .HasForeignKey(n => n.SenderId)
-     .OnDelete(DeleteBehavior.NoAction);
+     //   builder.HasMany(u => u.SentNotifications)
+     //.WithOne(n => n.Sender)
+     //.HasForeignKey(n => n.SenderId)
+     //.OnDelete(DeleteBehavior.NoAction);
 
-        builder.HasMany(u => u.ReceivedNotifications)
-            .WithOne(n => n.Receiver)
-            .HasForeignKey(n => n.ReceiverId)
-            .OnDelete(DeleteBehavior.NoAction);
+     //   builder.HasMany(u => u.ReceivedNotifications)
+     //       .WithOne(n => n.Receiver)
+     //       .HasForeignKey(n => n.ReceiverId)
+     //       .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(b => b.Trips)
             .WithOne(t => t.CreatedByUser)

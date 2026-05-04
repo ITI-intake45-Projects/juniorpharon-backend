@@ -27,7 +27,7 @@ namespace JuniorPharon.ViewModels
                 Comment = model.Comment,
                 Rating = model.Rating,
                 CreationDate = model.CreationDate,
-                TripId = model.TripId,
+                //TripId = model.TripId,
                 ClientId = model.ClientId,
                 ClientName = model.Client?.FirstName + " " + model.Client?.LastName,
                 ClientImage = model.Client?.ProfileImg ?? null,

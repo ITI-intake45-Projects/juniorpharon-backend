@@ -9,7 +9,7 @@ namespace JuniorPharon.Models
         public string Location { get; set; }
 
         public string City { get; set; }
-        public float Price { get; set; }
+        //public float Price { get; set; }
         
         
         public int DurationInDays { get; set; } // trip duration
@@ -26,6 +26,8 @@ namespace JuniorPharon.Models
         public virtual ICollection<Review> Reviews { get; set; }
 
         public virtual ICollection<TripContent> TripContents { get; set; } // for multilingual support
+        public virtual ICollection<PricingTier> PricingTiers { get; set; }
+        public virtual ICollection<TripItinerary> Itineraries { get; set; }
 
     }
 }
