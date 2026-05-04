@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Serilog;
 using Serilog.Events;
+using Integrations.Payments;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,8 +27,7 @@ builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<TripService>();
 builder.Services.AddScoped<DashboardService>();
 builder.Services.AddScoped<PaymentService>();
-
-
+builder.Services.AddScoped<IPaymentGateway, StripeGateway>();
 
 
 builder.Services.AddDbContext<DBContext>
@@ -54,7 +54,18 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAngular", policy => {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 var app = builder.Build();
+app.UseCors("AllowAngular");
+
 
 
 // Configure the HTTP request pipeline.

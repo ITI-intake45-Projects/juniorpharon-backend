@@ -13,6 +13,11 @@ namespace JuniorPharon.ViewModels
         public string FirstName { get; set; }
         public string? LastName { get; set; }
 
+        [Required(ErrorMessage = "Country Code is required")]
+        public string CountryCode { get; set; }
+        [Required]
+        public string PhoneNumber { get; set; }
+
         [Required(ErrorMessage = "UserName is Required")]
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Value Must be at least 5 characters ")]
         public string UserName { get; set; }

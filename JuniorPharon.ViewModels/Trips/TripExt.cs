@@ -10,7 +10,7 @@ namespace JuniorPharon.ViewModels
         {
             return new Trip
             { 
-                Price = TripVm.Price,
+                //Price = TripVm.Price,
                 DurationInDays = TripVm.DurationInDays,
                 Location = TripVm.Location,
                 City = TripVm.City,
@@ -23,18 +23,42 @@ namespace JuniorPharon.ViewModels
               
             };
         }
-        public static TripDetailsVM ToDetails(this Trip trip)
+        public static TripDetailsVM ToDetails(this Trip trip, int peopleCount)
         {
+            var tier = trip.PricingTiers
+                .FirstOrDefault(pt =>
+                    pt.MinPeople <= peopleCount &&
+                    pt.MaxPeople >= peopleCount
+                );
+
+            var price = tier?.PricePerPerson ?? 0;
+
+            // 🔥 Apply Admin Discount
+            if (tier?.DiscountPercentage != null)
+            {
+                price = price - (price * tier.DiscountPercentage.Value / 100);
+            }
+
             return new TripDetailsVM
             {
                 Id = trip.Id,
                 Location = trip.Location,
                 City = trip.City,
-                Price = trip.Price,
                 DurationInDays = trip.DurationInDays,
                 CreatedByUserId = trip.CreatedBy,
                 CreatedAt = trip.CreatedAt,
-                Rating = trip.Reviews.Any() ? trip.Reviews.Average(r => r.Rating) : 0,
+
+                // ⭐ Rating
+                Rating = trip.Reviews.Any()
+                    ? trip.Reviews.Average(r => r.Rating)
+                    : 0,
+
+                // 💰 السعر الجديد
+                PricePerPerson = price,
+
+                // 💸 السعر القديم (قبل الخصم)
+                OldPricePerPerson = tier?.PricePerPerson,
+
                 TripContents = trip.TripContents.Select(c => c.ToDetails()).ToList(),
                 TripImages = trip.TripImages.Select(img => img.ToDetails()).ToList()
             };

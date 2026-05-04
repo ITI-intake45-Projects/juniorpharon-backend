@@ -16,6 +16,9 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.IsDone)
             .HasDefaultValue(false);
 
+        builder.Property(p => p.Amount)
+       .HasColumnType("decimal(18,2)");
+
         builder.Property(p => p.BookingId)
             .IsRequired();
 

@@ -50,20 +50,22 @@ namespace JuniorPharon.Services
             }
         }
 
-        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> SearchTrip(string? location = "",
-           string? city = "",
-           float? minPrice = null,
-           float? maxPrice = null,
-           int? durationInDays = null,
-           float? rating = null,
-           bool descending = false,
-           int pageSize = 10,
-           int pageIndex = 1)
+        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> SearchTrip(
+        string? location = "",
+        string? city = "",
+        decimal? minPrice = null,
+        decimal? maxPrice = null,
+        int? durationInDays = null,
+        float? rating = null,
+        int peopleCount = 1, // 🔥 ضيف ده
+        bool descending = false,
+        int pageSize = 10,
+        int pageIndex = 1)
         {
             try
             {
                 var trips = await _unitOfWork._tripRepository.SearchTripDetails(
-                    location, city, minPrice, maxPrice, durationInDays, rating, descending, pageSize, pageIndex);
+                    location, city, minPrice, maxPrice, durationInDays, rating, peopleCount, descending, pageSize, pageIndex);
 
                 return ServiceResult<PaginationVM<TripDetailsVM>>.SuccessResult(trips, "Trips retrieved successfully.");
             }
@@ -74,11 +76,11 @@ namespace JuniorPharon.Services
             }
         }
 
-        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> GetAllTrips(int pageSize,int pageIndex)
+        public async Task<ServiceResult<PaginationVM<TripDetailsVM>>> GetAllTrips(int pageSize,int pageIndex , int peopleCount = 1)
         {
             try
             {
-                var trips = await _unitOfWork._tripRepository.GetAllTripsAsync(pageSize , pageIndex);
+                var trips = await _unitOfWork._tripRepository.GetAllTripsAsync(peopleCount,pageSize, pageIndex );
 
                 return ServiceResult<PaginationVM<TripDetailsVM>>.SuccessResult(trips, "Enrollments retrieved successfully.");
             }
@@ -89,7 +91,7 @@ namespace JuniorPharon.Services
             }
         }
 
-        public async Task<ServiceResult<TripDetailsVM>> GetTripById(int id)
+        public async Task<ServiceResult<TripDetailsVM>> GetTripById(int id , int peopleCount =1)
         {
             try
             {
@@ -102,7 +104,7 @@ namespace JuniorPharon.Services
                     return ServiceResult<TripDetailsVM>.FailureResult("Trip not found.");
                 }
 
-                var result = trip.ToDetails();
+                var result = trip.ToDetails(peopleCount);
 
                 return ServiceResult<TripDetailsVM>.SuccessResult(result, "Enrollment retrieved successfully.");
             }

@@ -46,7 +46,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("BookDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("date")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 863, DateTimeKind.Local).AddTicks(408));
+                        .HasDefaultValue(new DateTime(2026, 4, 14, 17, 38, 31, 536, DateTimeKind.Local).AddTicks(5398));
 
                     b.Property<DateTime?>("CancelDate")
                         .HasColumnType("datetime2");
@@ -110,7 +110,7 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Chat");
+                    b.ToTable("Chats");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Client", b =>
@@ -121,6 +121,59 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.DiscountCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("MaxUsage")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("MinAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("MinPeople")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsedCount")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Value")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique();
+
+                    b.ToTable("DiscountCodes");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Message", b =>
@@ -155,7 +208,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("SentAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 863, DateTimeKind.Local).AddTicks(8781));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.HasKey("Id");
 
@@ -179,11 +232,12 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(1505));
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<bool>("IsRead")
                         .ValueGeneratedOnAdd()
@@ -195,14 +249,16 @@ namespace Infrastructure.SqlServer.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SenderId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -210,7 +266,65 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Notification");
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.Package", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int>("DurationInDays")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
+
+                    b.Property<int>("MaxPeople")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Packages");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.PackageTrip", b =>
+                {
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DayOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("PackageId", "TripId");
+
+                    b.HasIndex("TripId");
+
+                    b.ToTable("PackageTrips");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Payment", b =>
@@ -253,6 +367,9 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("RefundDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("TransactionId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BookingId")
@@ -260,7 +377,53 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payments");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.PricingTier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal?>("DiscountPercentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MaxPeople")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinPeople")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PricePerPerson")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("TripId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageId")
+                        .HasFilter("[PackageId] IS NOT NULL");
+
+                    b.HasIndex("TripId")
+                        .HasFilter("[TripId] IS NOT NULL");
+
+                    b.HasIndex("PackageId", "MinPeople", "MaxPeople");
+
+                    b.HasIndex("TripId", "MinPeople", "MaxPeople");
+
+                    b.ToTable("PricingTiers", t =>
+                        {
+                            t.HasCheckConstraint("CK_PricingTier_MinMax", "MinPeople <= MaxPeople");
+
+                            t.HasCheckConstraint("CK_PricingTier_TripOrPackage", "(TripId IS NOT NULL AND PackageId IS NULL) OR (TripId IS NULL AND PackageId IS NOT NULL)");
+                        });
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Review", b =>
@@ -277,26 +440,41 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<DateTime>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(6808));
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("int");
 
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
-                    b.Property<int>("TripId")
+                    b.Property<int?>("TripId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
 
+                    b.HasIndex("PackageId");
+
                     b.HasIndex("TripId");
 
-                    b.ToTable("Reviews");
+                    b.HasIndex("PackageId", "CreationDate");
+
+                    b.HasIndex("TripId", "CreationDate");
+
+                    b.ToTable("Reviews", t =>
+                        {
+                            t.HasCheckConstraint("CK_Review_Rating", "Rating >= 1 AND Rating <= 5");
+
+                            t.HasCheckConstraint("CK_Review_TripOrPackage", "(TripId IS NOT NULL AND PackageId IS NULL) OR (TripId IS NULL AND PackageId IS NOT NULL)");
+                        });
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Trip", b =>
@@ -314,7 +492,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 864, DateTimeKind.Local).AddTicks(8467));
+                        .HasDefaultValue(new DateTime(2026, 4, 14, 17, 38, 31, 545, DateTimeKind.Local).AddTicks(8962));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -326,9 +504,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("Price")
-                        .HasColumnType("real");
 
                     b.HasKey("Id");
 
@@ -363,7 +538,7 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.HasIndex("TripId");
 
-                    b.ToTable("TripContent");
+                    b.ToTable("TripContents");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.TripImage", b =>
@@ -388,7 +563,9 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TripId");
+                    b.HasIndex("TripId", "IsCover")
+                        .IsUnique()
+                        .HasFilter("[IsCover] = 1");
 
                     b.ToTable("TripImages");
                 });
@@ -414,7 +591,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 865, DateTimeKind.Local).AddTicks(6492));
+                        .HasDefaultValue(new DateTime(2026, 4, 14, 17, 38, 31, 547, DateTimeKind.Local).AddTicks(804));
 
                     b.Property<string>("CurrentCountry")
                         .HasColumnType("nvarchar(max)");
@@ -451,7 +628,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 2, 26, 22, 36, 34, 865, DateTimeKind.Local).AddTicks(6019));
+                        .HasDefaultValue(new DateTime(2026, 4, 14, 17, 38, 31, 547, DateTimeKind.Local).AddTicks(200));
 
                     b.Property<string>("NationalId")
                         .HasColumnType("nvarchar(max)");
@@ -507,6 +684,68 @@ namespace Infrastructure.SqlServer.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.Wishlist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Wishlists");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.WishlistItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<int?>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TripId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WishlistId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageId");
+
+                    b.HasIndex("TripId");
+
+                    b.HasIndex("WishlistId", "PackageId")
+                        .IsUnique()
+                        .HasFilter("[PackageId] IS NOT NULL");
+
+                    b.HasIndex("WishlistId", "TripId")
+                        .IsUnique()
+                        .HasFilter("[TripId] IS NOT NULL");
+
+                    b.ToTable("WishlistItems", t =>
+                        {
+                            t.HasCheckConstraint("CK_WishlistItem_TripOrPackage", "(TripId IS NOT NULL AND PackageId IS NULL) OR (TripId IS NULL AND PackageId IS NOT NULL)");
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -658,7 +897,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasOne("JuniorPharon.Models.User", "Client")
                         .WithMany("Bookings")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("JuniorPharon.Models.Trip", "Trip")
@@ -740,11 +979,31 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasOne("JuniorPharon.Models.User", "Sender")
                         .WithMany("SentNotifications")
                         .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Receiver");
 
                     b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.PackageTrip", b =>
+                {
+                    b.HasOne("JuniorPharon.Models.Package", "Package")
+                        .WithMany("PackageTrips")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JuniorPharon.Models.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+
+                    b.Navigation("Trip");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Payment", b =>
@@ -766,6 +1025,23 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("Client");
                 });
 
+            modelBuilder.Entity("JuniorPharon.Models.PricingTier", b =>
+                {
+                    b.HasOne("JuniorPharon.Models.Package", "Package")
+                        .WithMany("PricingTiers")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("JuniorPharon.Models.Trip", "Trip")
+                        .WithMany("PricingTiers")
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Package");
+
+                    b.Navigation("Trip");
+                });
+
             modelBuilder.Entity("JuniorPharon.Models.Review", b =>
                 {
                     b.HasOne("JuniorPharon.Models.User", "Client")
@@ -774,13 +1050,19 @@ namespace Infrastructure.SqlServer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("JuniorPharon.Models.Package", "Package")
+                        .WithMany("Reviews")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.HasOne("JuniorPharon.Models.Trip", "Trip")
                         .WithMany("Reviews")
                         .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Client");
+
+                    b.Navigation("Package");
 
                     b.Navigation("Trip");
                 });
@@ -816,6 +1098,42 @@ namespace Infrastructure.SqlServer.Migrations
                         .IsRequired();
 
                     b.Navigation("Trip");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.Wishlist", b =>
+                {
+                    b.HasOne("JuniorPharon.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.WishlistItem", b =>
+                {
+                    b.HasOne("JuniorPharon.Models.Package", "Package")
+                        .WithMany()
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("JuniorPharon.Models.Trip", "Trip")
+                        .WithMany()
+                        .HasForeignKey("TripId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("JuniorPharon.Models.Wishlist", "Wishlist")
+                        .WithMany("Items")
+                        .HasForeignKey("WishlistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+
+                    b.Navigation("Trip");
+
+                    b.Navigation("Wishlist");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -880,9 +1198,20 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("Messages");
                 });
 
+            modelBuilder.Entity("JuniorPharon.Models.Package", b =>
+                {
+                    b.Navigation("PackageTrips");
+
+                    b.Navigation("PricingTiers");
+
+                    b.Navigation("Reviews");
+                });
+
             modelBuilder.Entity("JuniorPharon.Models.Trip", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("PricingTiers");
 
                     b.Navigation("Reviews");
 
@@ -912,6 +1241,11 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("SentNotifications");
 
                     b.Navigation("Trips");
+                });
+
+            modelBuilder.Entity("JuniorPharon.Models.Wishlist", b =>
+                {
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }
