@@ -42,9 +42,9 @@ namespace JuniorPharon.ViewModels
                     ? booking.Trip.Location
                     : null,
 
-                PackageName = booking.Package != null
-                    ? booking.Package.Name
-                    : null,
+                //PackageName = booking.Package != null
+                //    ? booking.Package.Name
+                //    : null,
 
                 ClientId = booking.ClientId,
 

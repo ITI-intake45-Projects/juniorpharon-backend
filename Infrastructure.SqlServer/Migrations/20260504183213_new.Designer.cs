@@ -4,6 +4,7 @@ using Infrastructure.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.SqlServer.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20260504183213_new")]
+    partial class @new
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,8 +115,7 @@ namespace Infrastructure.SqlServer.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -133,18 +135,14 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<int?>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("TripId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<int>("UsedCount")
                         .HasColumnType("int");
@@ -157,18 +155,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasIndex("Code")
                         .IsUnique();
 
-                    b.HasIndex("PackageId");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("TripId");
-
-                    b.ToTable("DiscountCodes", t =>
-                        {
-                            t.HasCheckConstraint("CK_Discount_Date", "EndDate > StartDate");
-
-                            t.HasCheckConstraint("CK_Discount_Value", "Value > 0");
-                        });
+                    b.ToTable("DiscountCodes");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Package", b =>
@@ -295,89 +282,6 @@ namespace Infrastructure.SqlServer.Migrations
                         });
                 });
 
-            modelBuilder.Entity("JuniorPharon.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("StockQuantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("JuniorPharon.Models.ProductContent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LanguageCode")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId", "LanguageCode")
-                        .IsUnique();
-
-                    b.ToTable("ProductContents");
-                });
-
-            modelBuilder.Entity("JuniorPharon.Models.ProductImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsCover")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId", "IsCover")
-                        .IsUnique()
-                        .HasFilter("[IsCover] = 1");
-
-                    b.ToTable("ProductImages");
-                });
-
             modelBuilder.Entity("JuniorPharon.Models.Receipt", b =>
                 {
                     b.Property<int>("Id")
@@ -439,9 +343,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<int?>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<float>("Rating")
                         .HasColumnType("real");
 
@@ -453,8 +354,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasIndex("ClientId");
 
                     b.HasIndex("PackageId");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("TripId");
 
@@ -485,7 +384,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 2, 53, 41, 26, DateTimeKind.Local).AddTicks(3023));
+                        .HasDefaultValue(new DateTime(2026, 5, 4, 21, 32, 11, 63, DateTimeKind.Local).AddTicks(4771));
 
                     b.Property<string>("CreatedBy")
                         .IsRequired()
@@ -617,7 +516,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("CreationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 2, 53, 41, 27, DateTimeKind.Local).AddTicks(4581));
+                        .HasDefaultValue(new DateTime(2026, 5, 4, 21, 32, 11, 66, DateTimeKind.Local).AddTicks(6269));
 
                     b.Property<string>("CurrentCountry")
                         .HasColumnType("nvarchar(max)");
@@ -654,7 +553,7 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<DateTime?>("ModificationDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2026, 5, 7, 2, 53, 41, 27, DateTimeKind.Local).AddTicks(4090));
+                        .HasDefaultValue(new DateTime(2026, 5, 4, 21, 32, 11, 66, DateTimeKind.Local).AddTicks(4273));
 
                     b.Property<string>("NationalId")
                         .HasColumnType("nvarchar(max)");
@@ -748,9 +647,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Property<int?>("PackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TripId")
                         .HasColumnType("int");
 
@@ -760,8 +656,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PackageId");
-
-                    b.HasIndex("ProductId");
 
                     b.HasIndex("TripId");
 
@@ -959,30 +853,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("JuniorPharon.Models.DiscountCode", b =>
-                {
-                    b.HasOne("JuniorPharon.Models.Package", "Package")
-                        .WithMany()
-                        .HasForeignKey("PackageId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("JuniorPharon.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("JuniorPharon.Models.Trip", "Trip")
-                        .WithMany()
-                        .HasForeignKey("TripId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Package");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Trip");
-                });
-
             modelBuilder.Entity("JuniorPharon.Models.PackageContent", b =>
                 {
                     b.HasOne("JuniorPharon.Models.Package", "Package")
@@ -1030,28 +900,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("Trip");
                 });
 
-            modelBuilder.Entity("JuniorPharon.Models.ProductContent", b =>
-                {
-                    b.HasOne("JuniorPharon.Models.Product", "Product")
-                        .WithMany("ProductContents")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("JuniorPharon.Models.ProductImage", b =>
-                {
-                    b.HasOne("JuniorPharon.Models.Product", "Product")
-                        .WithMany("ProductImages")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("JuniorPharon.Models.Receipt", b =>
                 {
                     b.HasOne("JuniorPharon.Models.Booking", "Booking")
@@ -1083,10 +931,6 @@ namespace Infrastructure.SqlServer.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("JuniorPharon.Models.Product", null)
-                        .WithMany("Reviews")
-                        .HasForeignKey("ProductId");
 
                     b.HasOne("JuniorPharon.Models.Trip", "Trip")
                         .WithMany("Reviews")
@@ -1161,10 +1005,6 @@ namespace Infrastructure.SqlServer.Migrations
                         .WithMany()
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("JuniorPharon.Models.Product", null)
-                        .WithMany("WishlistItems")
-                        .HasForeignKey("ProductId");
 
                     b.HasOne("JuniorPharon.Models.Trip", "Trip")
                         .WithMany()
@@ -1250,17 +1090,6 @@ namespace Infrastructure.SqlServer.Migrations
                     b.Navigation("PricingTiers");
 
                     b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("JuniorPharon.Models.Product", b =>
-                {
-                    b.Navigation("ProductContents");
-
-                    b.Navigation("ProductImages");
-
-                    b.Navigation("Reviews");
-
-                    b.Navigation("WishlistItems");
                 });
 
             modelBuilder.Entity("JuniorPharon.Models.Trip", b =>

@@ -37,6 +37,7 @@ namespace JuniorPharon.ViewModels
                 Nationality = user.Nationality,
                 Gender = user.Gender,
                 Age = user.Age,
+                phone = user.PhoneNumber ?? string.Empty ,
                 ProfileImg = user.ProfileImg,
                 City = user.City,
                 CurrentCountry = user.CurrentCountry,

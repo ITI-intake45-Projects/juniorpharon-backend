@@ -31,8 +31,7 @@ namespace JuniorPharon.Models
         public virtual Trip Trip { get; set; }
         public virtual Package Package { get; set; }
         public virtual User Client { get; set; }
-        public virtual Payment Payment { get; set; }
-
+        public virtual Receipt Receipt { get; set; }
         // ⚡ Calculated
         [NotMapped]
         public int DurationInDays =>

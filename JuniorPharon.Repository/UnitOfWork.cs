@@ -12,9 +12,7 @@ namespace JuniorPharon.Repository
         public UserRepository _userRepository { get; private set; }
         public BookingRepository _bookingRepository { get; private set; }
 
-        public NotificationRepository _notificationRepository { get; private set; }
-
-        public PaymentRepository _paymentRepository { get; private set; }
+      
         public ReviewRepository _reviewRepository { get; private set; }
         public TripRepository _tripRepository { get; private set; }
 
@@ -24,21 +22,20 @@ namespace JuniorPharon.Repository
         public UnitOfWork(DBContext context,
             AdminRepository adminRepository,
             BookingRepository bookingRepository,
-            NotificationRepository notificationRepository,
-            PaymentRepository paymentRepository,
+          
             ReviewRepository reviewRepository,
             TripRepository tripRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+            ClientRepositoty clientRepository
             )
         {
             _context = context;
             _adminRepository = adminRepository;
             _bookingRepository = bookingRepository;
-            _notificationRepository = notificationRepository;
-            _paymentRepository = paymentRepository;
             _reviewRepository = reviewRepository;
             _tripRepository = tripRepository;
             _userRepository = userRepository;
+            _clientRepository = clientRepository;
 
         }
 

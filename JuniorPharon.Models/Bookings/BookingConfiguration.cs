@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using JuniorPharon.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace JuniorPharon.Models;
@@ -24,8 +25,8 @@ public class BookingConfiguration : IEntityTypeConfiguration<Booking>
                .IsRequired();
 
         builder.Property(b => b.Status)
-               .HasConversion<int>() // يخزن enum كـ int
-               .HasDefaultValue(0);
+        .HasConversion<int>()
+        .HasDefaultValue(BookingStatus.Pending); // ✔️
 
         builder.Property(b => b.NumberOfPeople)
                .IsRequired();

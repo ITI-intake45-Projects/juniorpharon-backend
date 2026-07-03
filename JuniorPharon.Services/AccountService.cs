@@ -128,9 +128,24 @@ namespace JuniorPharon.Services
             return user != null;
         }
 
-        public async Task<User> GetUserById(string userId)
+        public async Task<UserProfileVM>GetUserById(string userId)
         {
-            return await _unitOfWork._userRepository.FindById(userId);
+            var user = await _unitOfWork._userRepository.FindById(userId);
+
+            if (user == null)
+            {
+                return null; // Or throw an exception, or return a ServiceResult with an error message
+            }
+
+            return user.ToDetails();
+        }
+
+        public async Task<IEnumerable<UserProfileVM>> GetUsers()
+        {
+            var users =  await _unitOfWork._userRepository.GetAllAsync();
+
+
+            return users.Select(u => u.ToDetails());
         }
 
         //public async Task<SignInResult> Login(UserLoginVM user)

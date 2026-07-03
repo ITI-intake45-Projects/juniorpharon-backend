@@ -1,6 +1,7 @@
 ﻿using JuniorPharon.Services;
 using JuniorPharon.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -147,8 +148,27 @@ namespace JuniorPharon.API.Controllers
             });
 
         }
+        [HttpGet("User/{userId}")]
+        public async Task<IActionResult> GetUserById(string userId)
+        {
+            var user = await accountService.GetUserById(userId);
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
+            return Ok(user);
+        }
 
-
+        [HttpGet("AllUsers")]
+        public async Task<IActionResult>GetUsers()
+        {
+            var users = await accountService.GetUsers();
+            if (users == null || !users.Any())
+            {
+                return NotFound(new { Message = "No users found." });
+            }
+            return new JsonResult(users);
+        }
 
         [HttpPost("Signout")]
         public async Task<IActionResult> Signout()
@@ -172,7 +192,7 @@ namespace JuniorPharon.API.Controllers
             if (res == null)
                 return Unauthorized(new { Message = "Session expired. Please login again." });
 
-            return Ok(new
+            return new JsonResult(new
             {
                 Message = "Token Refreshed Successfully",
                 Status = 200,

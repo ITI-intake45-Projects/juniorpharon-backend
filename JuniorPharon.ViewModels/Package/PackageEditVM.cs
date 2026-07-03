@@ -22,7 +22,7 @@ namespace JuniorPharon.ViewModels
         public bool? IsActive { get; set; }
 
         // 🔥 ممكن تعدل trips
-        public List<PackageTripVM>? Trips { get; set; }
+        public List<PackageTripCreateVM>? Trips { get; set; }
 
         // 🔥 وممكن تعدل pricing
         public List<PricingTierCreateVM>? PricingTiers { get; set; }

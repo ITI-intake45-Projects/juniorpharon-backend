@@ -16,6 +16,8 @@ namespace JuniorPharon.ViewModels
         public string? City { get; set; }
         public string Nationality { get; set; }
         public int? Age { get; set; }
+
+        public string phone { get; set; }
         public Gender? Gender { get; set; }
         public Roles Role { get; set; }
         public DateTime? CreationDate { get; set; }

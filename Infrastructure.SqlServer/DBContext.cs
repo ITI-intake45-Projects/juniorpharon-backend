@@ -17,7 +17,7 @@ public class DBContext : IdentityDbContext<User>
     public DbSet<TripItinerary> TripItineraries { get; set; }
 
     public DbSet<Booking> Bookings { get; set; }
-    public DbSet<Payment> Payments { get; set; }
+    public DbSet<Receipt> Receipts { get; set; }
 
     public DbSet<Review> Reviews { get; set; }
 
@@ -25,15 +25,17 @@ public class DBContext : IdentityDbContext<User>
     public DbSet<PackageTrip> PackageTrips { get; set; }
     public DbSet<PackageContent> PackageContents { get; set; }
 
+    public DbSet<Product> Products { get; set; }
+    public DbSet<ProductImage> ProductImages { get; set; }
+
+    public DbSet<ProductContent> ProductContents { get; set; }
+
     public DbSet<PricingTier> PricingTiers { get; set; }
     public DbSet<DiscountCode> DiscountCodes { get; set; }
 
     public DbSet<Wishlist> Wishlists { get; set; }
     public DbSet<WishlistItem> WishlistItems { get; set; }
 
-    public DbSet<Message> Messages { get; set; }
-    public DbSet<Notification> Notifications { get; set; }
-    public DbSet<Chat> Chats { get; set; }
 
     public DbSet<Admin> Admins { get; set; }
     public DbSet<Client> Clients { get; set; }

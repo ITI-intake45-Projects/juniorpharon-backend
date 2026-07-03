@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Serilog;
 using Serilog.Events;
-using Integrations.Payments;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +16,7 @@ builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<AdminRepository>();
 builder.Services.AddScoped<ClientRepositoty>();
 builder.Services.AddScoped<BookingRepository>();
-builder.Services.AddScoped<NotificationRepository>();
-builder.Services.AddScoped<PaymentRepository>();
+
 builder.Services.AddScoped<ReviewRepository>();
 builder.Services.AddScoped<TripRepository>();
 builder.Services.AddScoped<UserRepository>();
@@ -26,8 +24,7 @@ builder.Services.AddScoped<UnitOfWork>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<TripService>();
 builder.Services.AddScoped<DashboardService>();
-builder.Services.AddScoped<PaymentService>();
-builder.Services.AddScoped<IPaymentGateway, StripeGateway>();
+
 
 
 builder.Services.AddDbContext<DBContext>

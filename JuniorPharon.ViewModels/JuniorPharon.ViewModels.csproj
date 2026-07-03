@@ -15,4 +15,8 @@
     <ProjectReference Include="..\JuniorPharon.Models\JuniorPharon.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Inquery\" />
+  </ItemGroup>
+
 </Project>
