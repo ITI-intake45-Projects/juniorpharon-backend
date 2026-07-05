@@ -16,5 +16,6 @@ namespace JuniorPharon.Models
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<WishlistItem> WishlistItems { get; set; }
+        public virtual ICollection<Gift> Gifts { get; set; }
     }
 }

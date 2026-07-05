@@ -12,9 +12,10 @@ public class TripConfiguration : IEntityTypeConfiguration<Trip>
         builder.Property(t => t.DurationInDays).IsRequired();
         builder.Property(t => t.CreatedAt).HasDefaultValue(DateTime.Now);
         builder.Property(t => t.Location).IsRequired();
+        //builder.Property(t => t.Name).IsRequired();
         //builder.Property(t => t.Price).IsRequired();
 
-        
+
         //Relations : 
 
         //builder.HasMany(t => t.Bookings)

@@ -1,5 +1,6 @@
 ﻿
 using JuniorPharon.Models;
+using JuniorPharon.Models.Enums;
 
 namespace JuniorPharon.ViewModels
 {
@@ -22,6 +23,13 @@ namespace JuniorPharon.ViewModels
                 //=> imgVm.ToCreate(imgUrls[index])).ToList() 
               
             };
+        }
+
+
+        public static TripContent? GetContent(this Trip trip, LanguageCode language = LanguageCode.En)
+        {
+            return trip.TripContents
+                .FirstOrDefault(x => x.LanguageCode == language);
         }
         public static TripDetailsVM ToDetails(this Trip trip, int peopleCount)
         {

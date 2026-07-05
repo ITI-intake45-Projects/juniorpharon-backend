@@ -13,7 +13,7 @@ namespace JuniorPharon.Models.TripsContents
         public void Configure(EntityTypeBuilder<TripContent> builder)
         {
             builder.HasKey(tc => tc.Id);
-            builder.Property(tc => tc.Title).IsRequired().HasColumnType("NVARCHAR(MAX)");
+            builder.Property(tc => tc.Name).IsRequired().HasColumnType("NVARCHAR(MAX)");
             builder.Property(tc => tc.Description).IsRequired().HasColumnType("NVARCHAR(MAX)");
             builder.Property(tc => tc.LanguageCode).IsRequired();
 

@@ -12,7 +12,7 @@ namespace JuniorPharon.ViewModels
         {
             return new TripContent
             { 
-                Title = content.Title,
+                Name = content.Name,
                 Description = content.Description,
                 LanguageCode = content.LanguageCode,
             };
@@ -24,7 +24,7 @@ namespace JuniorPharon.ViewModels
             return new TripContentDetailsVM
             {
                 Id = content.Id,
-                Title = content.Title,
+                Name = content.Name,
                 Description = content.Description,
                 LanguageCode = content.LanguageCode 
             };
@@ -34,7 +34,7 @@ namespace JuniorPharon.ViewModels
         public static TripContent ToEdit(this TripContentEditVM NewContent , TripContent OldContent)
         {
           
-            OldContent.Title = string.IsNullOrEmpty(NewContent.Title) ? OldContent.Title : NewContent.Title;
+            OldContent.Name = string.IsNullOrEmpty(NewContent.Name) ? OldContent.Name : NewContent.Name;
             OldContent.Description = string.IsNullOrEmpty(NewContent.Description) ? OldContent.Description : NewContent.Description;
             
 

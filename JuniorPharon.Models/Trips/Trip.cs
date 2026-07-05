@@ -5,7 +5,7 @@ namespace JuniorPharon.Models
     public class Trip
     {
         public int Id { get; set; }
-        
+        //public string Name { get; set; }
         public string Location { get; set; }
 
         public string City { get; set; }
@@ -28,6 +28,8 @@ namespace JuniorPharon.Models
         public virtual ICollection<TripContent> TripContents { get; set; } // for multilingual support
         public virtual ICollection<PricingTier> PricingTiers { get; set; }
         public virtual ICollection<TripItinerary> Itineraries { get; set; }
+
+        public virtual ICollection<Gift> Gifts { get; set; }
 
     }
 }

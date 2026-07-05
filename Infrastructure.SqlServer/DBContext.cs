@@ -21,6 +21,8 @@ public class DBContext : IdentityDbContext<User>
 
     public DbSet<Review> Reviews { get; set; }
 
+    public DbSet<Gift> Gifts { get; set; }
+
     public DbSet<Package> Packages { get; set; }
     public DbSet<PackageTrip> PackageTrips { get; set; }
     public DbSet<PackageContent> PackageContents { get; set; }
